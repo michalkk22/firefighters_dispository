@@ -1,17 +1,20 @@
 import 'dart:math';
 
-import 'package:firefighters_dispository/service/dispository.dart';
-
 class City {
   final Point areaStart;
   final Point areaEnd;
-  final Iterable<Point> firefighters;
-  final Dispository dispository;
+  final Map<Iterable<Point>, int> brigades;
+
+  Point call() {
+    return Point(
+      Random().nextDouble() * (areaEnd.x - areaStart.x),
+      Random().nextDouble() * (areaEnd.y - areaStart.y),
+    );
+  }
 
   City({
     required this.areaStart,
     required this.areaEnd,
-    required this.firefighters,
-    required this.dispository,
+    required this.brigades,
   });
 }
