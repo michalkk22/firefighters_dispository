@@ -1,30 +1,34 @@
 import 'dart:async';
 
 import 'package:firefighters_dispository/constants/config.dart';
+import 'package:firefighters_dispository/domain/event/event.dart';
 import 'package:firefighters_dispository/service/logs_manager/logs_manager.dart';
 import 'package:firefighters_dispository/utils/single_random.dart';
 
 class Team {
   bool _free = true;
-  // TODO: notify in action
+  final int teamNumber;
   LogsManager _logsManager = LogsManager();
-  // TODO: well, also some brigade id and team id should be logged to identify who done stuff
+
+  Team({required this.teamNumber});
 
   bool get free => _free;
 
-  bool send(Duration travelTime) {
+  bool send(Event event) {
     if (!_free) return false;
-    _action(travelTime);
+    _action();
     return true;
   }
 
-  Future<void> _action(Duration travelTime) async {
+  Future<void> _action() async {
     _free = false;
+    Duration travelTime =
+        _randomTime(maxMilliseconds: Config.travelTimeMaxMilliseconds);
     _wait(travelTime);
-    Duration actionTime = Duration(
-        seconds: SingleRandom().random.nextInt(
-                Config.eventActionTimeMax - Config.eventActionTimeMin) +
-            Config.eventActionTimeMin);
+    Duration actionTime = _randomTime(
+      maxMilliseconds: Config.eventActionTimeSecondsMax * 1000,
+      minMilliseconds: Config.eventActionTimeSecondsMin * 1000,
+    );
     _wait(actionTime);
     _wait(travelTime);
     _free = true;
@@ -33,4 +37,15 @@ class Team {
   void _wait(Duration duration) {
     Timer(duration, () {});
   }
+
+  Duration _randomTime(
+      {required int maxMilliseconds, int minMilliseconds = 0}) {
+    return Duration(
+        milliseconds: (SingleRandom().random.nextDouble() *
+                    (maxMilliseconds - minMilliseconds) +
+                minMilliseconds)
+            .toInt());
+  }
+
+  void _report(String text) {}
 }

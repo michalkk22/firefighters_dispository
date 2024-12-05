@@ -1,20 +1,17 @@
-import 'dart:math';
+import 'dart:convert';
+import 'dart:io';
 
+import 'package:firefighters_dispository/constants/data_filepaths.dart';
 import 'package:firefighters_dispository/domain/area.dart';
 
 class AreaRepo {
-  void save(Area city) {}
+  final String filePath = filePathJsonArea;
+
+  void save(Area area) {
+    final file = File(filePath);
+    final jsonData = jsonEncode(area.toJson());
+    file.writeAsStringSync(jsonData);
+  }
 
   // Area load() {}
-
-  Map<String, dynamic> _toJson(Area city) {
-    return {
-      'areaStart': _pointToList(city.startPoint),
-      'areaEnd': _pointToList(city.endPoint),
-    };
-  }
-
-  List<num> _pointToList(Point point) {
-    return [point.x, point.y];
-  }
 }

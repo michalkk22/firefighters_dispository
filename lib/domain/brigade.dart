@@ -6,12 +6,17 @@ import 'package:firefighters_dispository/domain/i_brigade.dart';
 import 'package:firefighters_dispository/utils/single_random.dart';
 
 class Brigade implements IBrigade {
+  final String _name;
   final Point<double> _localization;
   final int _teamsNumber;
   int _counter;
 
-  Brigade({required Point<double> localization, required int teamsNumber})
-      : _localization = localization,
+  Brigade({
+    required String name,
+    required Point<double> localization,
+    required int teamsNumber,
+  })  : _name = name,
+        _localization = localization,
         _teamsNumber = teamsNumber,
         _counter = teamsNumber;
 
@@ -41,4 +46,6 @@ class Brigade implements IBrigade {
 
   @override
   Point<double> get localization => _localization;
+
+  String get name => _name;
 }

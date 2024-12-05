@@ -11,8 +11,8 @@ class LogsManager {
 
   Stream<List<String>> get stream => _controller.stream;
 
-  void addLog(String log) {
-    _logs.add(log);
+  void log(String text) {
+    _logs.add(text);
     _controller.add(List.unmodifiable(_logs));
   }
 }

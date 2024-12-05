@@ -1,3 +1,4 @@
+import 'package:firefighters_dispository/widgets/dispository_logs_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -21,14 +22,14 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Simulation'),
+        title: const Text(''),
       ),
       body: Center(
         child: _isSimulationStarted
-            ? const Text('dupa')
+            ? const DispositoryLogsWidget()
             : TextButton(
                 onPressed: _startSimulation,
-                child: const Text('Start Simulation'),
+                child: const Text('Start'),
               ),
       ),
     );
