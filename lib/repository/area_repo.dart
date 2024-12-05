@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:firefighters_dispository/model/area.dart';
+import 'package:firefighters_dispository/domain/area.dart';
 
 class AreaRepo {
   void save(Area city) {}
 
-  // City load() {}
+  // Area load() {}
 
   Map<String, dynamic> _toJson(Area city) {
     return {
