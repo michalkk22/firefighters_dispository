@@ -1,0 +1,1 @@
+class SendingNotFreeTeamException implements Exception {}
