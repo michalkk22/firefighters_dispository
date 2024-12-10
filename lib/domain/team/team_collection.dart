@@ -1,7 +1,8 @@
+import 'package:firefighters_dispository/domain/event/event.dart';
 import 'package:firefighters_dispository/domain/team/team.dart';
 
-abstract class TeamCollection {
+abstract interface class TeamCollection {
   void add(Team team);
   bool hasFree();
-  bool sendOne();
+  bool sendOne(Event event);
 }

@@ -1,5 +1,7 @@
-import 'package:firefighters_dispository/service/dispository_service/dispository.dart';
-import 'package:firefighters_dispository/service/logs_manager/logs_manager.dart';
+import 'package:firefighters_dispository/domain/area.dart';
+import 'package:firefighters_dispository/domain/event/periodic_random_event_stream.dart';
+import 'package:firefighters_dispository/service/dispository/dispository.dart';
+import 'package:firefighters_dispository/domain/logs_manager.dart';
 import 'package:flutter/material.dart';
 
 class DispositoryLogsWidget extends StatefulWidget {
@@ -10,39 +12,41 @@ class DispositoryLogsWidget extends StatefulWidget {
 }
 
 class _DispositoryLogsWidgetState extends State<DispositoryLogsWidget> {
-  late Dispository _dispository;
-  late TextEditingController _controller;
   final LogsManager _logsManager = LogsManager();
 
-  @override
-  void initState() {
-    _dispository = Dispository();
-    _controller = TextEditingController();
-    super.initState();
-  }
+  bool _isStarted = false;
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void _start() {
+    setState(() {
+      final randomEventStream =
+          PeriodicRandomEventStream(area: Area.fromRepo());
+      Dispository(events: randomEventStream.events());
+      _isStarted = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<String>>(
-      stream: _logsManager.stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final logs = snapshot.data!;
-          return ListView.builder(
-            itemCount: logs.length,
-            itemBuilder: (context, index) => ListTile(
-              title: Text(logs[index]),
-            ),
+    print('building DispositoryLogsWidget');
+    return _isStarted
+        ? StreamBuilder<List<String>>(
+            stream: _logsManager.stream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final logs = snapshot.data!;
+                return ListView.builder(
+                  itemCount: logs.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(logs[index]),
+                  ),
+                );
+              }
+              return const CircularProgressIndicator();
+            },
+          )
+        : TextButton(
+            onPressed: _start,
+            child: const Text('Start'),
           );
-        }
-        return const CircularProgressIndicator();
-      },
-    );
   }
 }

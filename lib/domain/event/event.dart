@@ -30,4 +30,9 @@ class Event {
 
   bool get isFalse => _isFalse;
   Point<double> get where => _where;
+
+  @override
+  String toString() {
+    return 'zdarzenie: $type, lokalizacja: $_where';
+  }
 }

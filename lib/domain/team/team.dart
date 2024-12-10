@@ -4,7 +4,7 @@ import 'package:firefighters_dispository/constants/config.dart';
 import 'package:firefighters_dispository/domain/event/event.dart';
 import 'package:firefighters_dispository/domain/brigade/i_brigade.dart';
 import 'package:firefighters_dispository/domain/team/team_exception.dart';
-import 'package:firefighters_dispository/service/logs_manager/logs_manager.dart';
+import 'package:firefighters_dispository/domain/logs_manager.dart';
 import 'package:firefighters_dispository/utils/single_random.dart';
 
 class Team {
@@ -22,16 +22,16 @@ class Team {
       throw SendingNotFreeTeamException();
     }
 
+    _free = false;
     _action(event);
     return true;
   }
 
   Future<void> _action(Event event) async {
     _report(text: 'odjazd z jednostki');
-    _free = false;
     Duration travelTime =
         _randomTime(maxMilliseconds: Config.travelTimeMaxMilliseconds);
-    _wait(travelTime);
+    await _wait(travelTime);
 
     _report(text: 'na miejscu', event: event);
     if (!event.isFalse) {
@@ -39,15 +39,15 @@ class Team {
         maxMilliseconds: Config.eventActionTimeSecondsMax * 1000,
         minMilliseconds: Config.eventActionTimeSecondsMin * 1000,
       );
-      _wait(actionTime);
+      await _wait(actionTime);
     }
 
     _report(text: 'wracamy');
-    _wait(travelTime);
+    await _wait(travelTime);
     _free = true;
   }
 
-  void _wait(Duration duration) {
+  Future<void> _wait(Duration duration) async {
     Timer(duration, () {});
   }
 

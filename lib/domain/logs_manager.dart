@@ -14,5 +14,6 @@ class LogsManager {
   void log(String text) {
     _logs.add(text);
     _controller.add(List.unmodifiable(_logs));
+    print('Logged: $text');
   }
 }

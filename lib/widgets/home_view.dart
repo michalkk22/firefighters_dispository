@@ -9,14 +9,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool _isSimulationStarted = false;
-
-  void _startSimulation() {
-    setState(() {
-      _isSimulationStarted = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +16,7 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text(''),
       ),
-      body: Center(
-        child: _isSimulationStarted
-            ? const DispositoryLogsWidget()
-            : TextButton(
-                onPressed: _startSimulation,
-                child: const Text('Start'),
-              ),
-      ),
+      body: const DispositoryLogsWidget(),
     );
   }
 }

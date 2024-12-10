@@ -4,4 +4,5 @@ class Config {
   static const double eventChanceFire = 0.3;
   static const int eventActionTimeSecondsMin = 5;
   static const int eventActionTimeSecondsMax = 25;
+  static const int eventIntervalMiliseconds = 2000;
 }
