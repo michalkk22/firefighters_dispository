@@ -33,6 +33,6 @@ class Event {
 
   @override
   String toString() {
-    return 'zdarzenie: $type, lokalizacja: $_where';
+    return '$type, lokalizacja: (${_where.x}, ${_where.y})';
   }
 }

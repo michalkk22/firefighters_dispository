@@ -31,7 +31,7 @@ class Team {
     _report(text: 'odjazd z jednostki');
     Duration travelTime =
         _randomTime(maxMilliseconds: Config.travelTimeMaxMilliseconds);
-    await _wait(travelTime);
+    await Future.delayed(travelTime);
 
     _report(text: 'na miejscu', event: event);
     if (!event.isFalse) {
@@ -39,16 +39,12 @@ class Team {
         maxMilliseconds: Config.eventActionTimeSecondsMax * 1000,
         minMilliseconds: Config.eventActionTimeSecondsMin * 1000,
       );
-      await _wait(actionTime);
+      await Future.delayed(actionTime);
     }
 
     _report(text: 'wracamy');
-    await _wait(travelTime);
+    await Future.delayed(travelTime);
     _free = true;
-  }
-
-  Future<void> _wait(Duration duration) async {
-    Timer(duration, () {});
   }
 
   Duration _randomTime(
@@ -63,7 +59,7 @@ class Team {
   void _report({required String text, Event? event}) {
     String report = '${_brigade.name}: drużyna $teamNumber: $text';
     if (event != null) {
-      report += ', zdarzenie: ${event.type} - ';
+      report += ', ${event.type} - ';
       event.isFalse
           ? report += 'alarm fałszywy'
           : report += 'przystępujemy do akcji';

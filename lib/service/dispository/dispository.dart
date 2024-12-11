@@ -12,6 +12,7 @@ class Dispository {
   final Stream<Event> _events;
   final Queue<Event> _queue = Queue();
   final Completer<void> _completer = Completer();
+  final Stream<Event> _doneEvents = Stream.empty();
 
   Dispository({required Stream<Event> events}) : _events = events {
     try {
@@ -47,22 +48,27 @@ class Dispository {
 
   Future<void> _processEvents() async {
     while (true) {
+      print('process 1');
       await _completer.future;
 
+      print('process 2');
       while (_queue.isNotEmpty) {
+        print('process 3');
         final event = _queue.removeFirst();
         await _handleEvent(event);
       }
-
-      _completer.complete();
+      print('process 4');
     }
   }
 
   Future<void> _handleEvent(Event event) async {
+    print('handle 1');
     while (!_brigades.sendNearest(event)) {
+      print('handle 2');
       _logsManager.log('Brak wolnych drużyn, czekam...');
       await Future.delayed(const Duration(seconds: 1));
     }
+    print('handle 3');
 
     _logsManager.log('Drużyna w drodze do: $event');
   }
