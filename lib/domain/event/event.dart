@@ -9,23 +9,24 @@ class Event {
   final EventType type;
   final Point<double> _where;
   final bool _isFalse;
+  final int asd;
 
   static bool _drawIsFalse() =>
       Random().nextDouble() < Config.eventChanceFalse ? true : false;
 
-  Event(
+  Event(this.asd,
       {required this.type, required Point<double> where, required bool isFalse})
       : _where = where,
         _isFalse = isFalse;
 
-  factory Event.random(Area area) {
+  factory Event.random(Area area, int asd) {
     EventType type = SingleRandom().random.nextDouble() < Config.eventChanceFire
         ? EventFire()
         : EventLocal();
 
     Point<double> where = area.randomPoint();
     bool isFalse = _drawIsFalse();
-    return Event(type: type, where: where, isFalse: isFalse);
+    return Event(type: type, where: where, isFalse: isFalse, asd);
   }
 
   bool get isFalse => _isFalse;
@@ -33,6 +34,6 @@ class Event {
 
   @override
   String toString() {
-    return '$type, lokalizacja: (${_where.x}, ${_where.y})';
+    return '$type, lokalizacja: (${_where.x}, ${_where.y}), NUMBER: $asd';
   }
 }

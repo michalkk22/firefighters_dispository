@@ -14,6 +14,6 @@ class PeriodicRandomEventStream {
 
   Stream<Event> events() => Stream.periodic(
         interval,
-        (_) => Event.random(area),
+        (i) => Event.random(area, i),
       );
 }

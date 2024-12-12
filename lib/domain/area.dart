@@ -11,8 +11,8 @@ class Area {
   Point<double> randomPoint() {
     Random random = SingleRandom().random;
     return Point(
-      random.nextDouble() * (endPoint.x - startPoint.x),
-      random.nextDouble() * (endPoint.y - startPoint.y),
+      random.nextDouble() * (endPoint.x - startPoint.x).abs() + startPoint.x,
+      random.nextDouble() * (endPoint.y - startPoint.y).abs() + startPoint.y,
     );
   }
 

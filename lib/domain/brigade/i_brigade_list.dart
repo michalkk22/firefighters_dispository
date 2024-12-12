@@ -26,8 +26,8 @@ class IBrigadeList implements IBrigadeCollection {
             .compareTo(b.localization.distanceTo(event.where));
       },
     );
-    for (var b in _brigades) {
-      if (b.call(event)) return true;
+    for (var i = 0; i < _brigades.length; i++) {
+      if (_brigades[i].call(event)) return true;
     }
     return false;
   }

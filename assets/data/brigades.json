@@ -1,18 +1,82 @@
 [
     {
-        "name": "Brigade 1 Dupa",
+        "name": "JRG-1",
         "localization": {
-            "x": 10.5,
-            "y": 20.3
+            "y": 19.949127029139575,
+            "x": 50.06170383804927
         },
-        "teamsNumber": 2
+        "teamsNumber": 5
     },
     {
-        "name": "Brigade 2 Cipa",
+        "name": "JRG-2",
         "localization": {
-            "x": 15.0,
-            "y": 25.7
+            "y": 19.93741915182105,
+            "x": 50.03371168898571
         },
-        "teamsNumber": 2
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG-3",
+        "localization": {
+            "y": 19.888615652823113,
+            "x": 50.076079828003394
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG-4",
+        "localization": {
+            "y": 20.006012960532704,
+            "x": 50.0379091177621
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG-5",
+        "localization": {
+            "y": 19.92000623965543,
+            "x": 50.09194231652092
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG-6",
+        "localization": {
+            "y": 20.016143323741066,
+            "x": 50.016222762694284
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG-7",
+        "localization": {
+            "y": 19.97800535442619,
+            "x": 50.09422269705931
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG Skawina1",
+        "localization": {
+            "y": 19.800103883255687,
+            "x": 49.96855479272886
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG Szkoła",
+        "localization": {
+            "y": 20.033345918204954,
+            "x": 50.077274974648205
+        },
+        "teamsNumber": 5
+    },
+    {
+        "name": "JRG Skawina2",
+        "localization": {
+            "y": 19.790850099832614,
+            "x": 50.08680903613572
+        },
+        "teamsNumber": 5
     }
 ]
